@@ -11,11 +11,11 @@ const initialState = {
 const INCREMENT = 'INCREMENT';
 const DECREMENT = 'DECREMENT';
 
-const incrementValue = () => ({
+const increment = () => ({
   type: INCREMENT,
 });
 
-const decrementValue = () => ({
+const decrement = () => ({
   type: DECREMENT,
 });
 
@@ -55,15 +55,9 @@ class Counter extends Component {
 
 const mapStateToProps = state => { return state; };
 
-const mapDispatchToProps = dispatch => {
-  return {
-    increment(){
-      dispatch(incrementValue());
-    },
-    decrement(){
-      dispatch(decrementValue());
-    },
-  };
+const mapDispatchToProps = {
+  increment,
+  decrement
 };
 
 const CounterContainer = connect(
