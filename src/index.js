@@ -10,6 +10,7 @@ const initialState = {
 
 const INCREMENT = 'INCREMENT';
 const DECREMENT = 'DECREMENT';
+const RESET = 'RESET';
 
 const increment = () => ({
   type: INCREMENT,
@@ -17,6 +18,10 @@ const increment = () => ({
 
 const decrement = () => ({
   type: DECREMENT,
+});
+
+const reset = () => ({
+  type: RESET,
 });
 
 const reducer = (state = initialState, action) => {
@@ -28,6 +33,10 @@ const reducer = (state = initialState, action) => {
     return {
       count: state.count - 1,
     }
+  }else if(action.type === RESET){
+    return {
+      count: 0,
+    }
   }
 
   return state;
@@ -37,8 +46,8 @@ const store = createStore(reducer);
 
 class Counter extends Component {
   render() {
-    const { count, increment, decrement } = this.props;
-    console.log({ count, increment });
+    const { count, increment, decrement, reset } = this.props;
+    console.log({ count, increment, decrement, reset });
 
     return (
       <main className="Counter">
@@ -46,7 +55,7 @@ class Counter extends Component {
         <section className="controls">
           <button onClick={increment}>Increment</button>
           <button onClick={decrement}>Decrement</button>
-          <button>Reset</button>
+          <button onClick={reset}>Reset</button>
         </section>
       </main>
     );
@@ -57,7 +66,8 @@ const mapStateToProps = state => { return state; };
 
 const mapDispatchToProps = {
   increment,
-  decrement
+  decrement,
+  reset,
 };
 
 const CounterContainer = connect(
